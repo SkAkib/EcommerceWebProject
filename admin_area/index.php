@@ -46,7 +46,7 @@
         <!--button*10>a.nav-link.text-light.bg-info.my-1-->
                     
                     <button class="my-1"><a href="" class="nav-link text-light bg-info my-1">Insert Products</a></button>
-
+                    
                     <button class="my-1"><a href="" class="nav-link text-light bg-info my-1">View Products</a></button>
 
                     <button class="my-1"><a href="index.php?insert_category" class="nav-link text-light bg-info my-1">Insert Categories</a></button>
@@ -67,6 +67,8 @@
                 </div>
             </div>
         </div>
+        <!--go back home button-->
+        <button class="my-1"><a href="../index.php" class="nav-link text-light bg-info my-1 px-2"><i class="fa-solid fa-house"></i>Go to Homepage</a></button>
 
         <!--Fourth child-->
         <div class="container my-3">
