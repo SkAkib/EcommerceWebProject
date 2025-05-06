@@ -90,64 +90,49 @@ include('includes/connect.php');
 <!--Fourth child-->
 <div class="row">
   <div class="col-md-10">
+    
     <!--Products-->
     <div class="row">
-      <div class="col-md-4 mb-2">
-      <div class="card">
-  <img class="card-img-top" src="./images/mango.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to cart</a>
-    <a href="#" class="btn btn-primary">View More</a>
-  </div>
-</div>
-      </div>
-      <div class="col-md-4 mb-2">
-      <div class="card">
-  <img class="card-img-top" src="./images/apple.avif" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to cart</a>
-    <a href="#" class="btn btn-primary">View More</a>
-  </div>
-</div>
-      </div>
-      <div class="col-md-4 mb-2">
-      <div class="card">
-  <img class="card-img-top" src="./images/banana.jpeg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to cart</a>
-    <a href="#" class="btn btn-primary">View More</a>
-  </div>
-</div>
-      </div>
-      <div class="col-md-4 mb-2">
-      <div class="card">
-  <img class="card-img-top" src="./images/banana.jpeg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Add to cart</a>
-    <a href="#" class="btn btn-primary">View More</a>
-  </div>
-</div>
-      </div>
-      <div class="col-md-4 mb-2">
-      <div class="card">
-  <img class="card-img-top" src="./images/banana.jpeg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-      </div>
+<!--fetching query-->
+    <?php
+    $select_query="select * from `products` order by rand() limit 0,9"; 
+    $result_query=mysqli_query($con,$select_query);
+    //$row=mysqli_fetch_assoc($result_query);
+    //echo $row['product_title'];
+    while($row=mysqli_fetch_assoc($result_query)){
+      $product_id=$row['product_id'];
+      $product_title=$row['product_title'];
+      $product_description=$row['product_description'];
+      $product_image=$row['product_image1'];
+      $category_id=$row['category_id'];
+      $brand_id=$row['brand_id'];
+      $product_price=$row['product_price'];
+
+      echo "<div class='col-md-4 mb-2'>
+        <div class='card'>
+          <img class='card-img-top' src='./admin_area/product_images/$product_image' alt='$product_title'>
+            <div class='card-body'>
+              <h5 class='card-title'>$product_title</h5>
+              <p class='card-text'>$product_description</p>
+              <a href='#' class='btn btn-primary'>Go somewhere</a>
+            </div>
+        </div>
+      </div>";
       
-      </div>
+    }
+    ?>
+     <!-- <div class="col-md-4 mb-2">
+        <div class="card">
+          <img class="card-img-top" src="./images/banana.jpeg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+      </div> -->
+
+    </div>
   </div>
     <div class="col-md-2 bg-secondary p-0">
       <!--Side nav-->
