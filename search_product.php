@@ -37,7 +37,7 @@ include('functions/common_function.php')
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="display_all.php">Products</a>
+              <a class="nav-link" href="#">Products</a>
             </li>
 
             <li class="nav-item">
@@ -65,7 +65,7 @@ include('functions/common_function.php')
 
           </ul>
 
-          <form class="d-flex" action="search_product.php" method="get">
+          <form class="d-flex" action=" " method="get">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
             <!--<button class="btn btn-outline-light" type="submit">Search</button> -->
             <input type="submit" value="search" class="btn btn-outline-light" name="search_data_product">
@@ -101,7 +101,7 @@ include('functions/common_function.php')
           <?php
 
           //calling getproduct function
-          getproducts();
+          search_product();
           get_unique_categories();
           get_unique_brands()
 
@@ -207,12 +207,16 @@ include('functions/common_function.php')
     </div>
 
     <!--last child-->
-    <!--include footer-->
-    <?php
-    include("./includes/footer.php")
-    ?>
-  
+    <div class="bg-info p-3 text-center">
+      <P>All rights resereved ,Copyright 2022</P>
+    </div>
+
+
   </div>
+
+
+
+
 
   <!-- bootstrap js link -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

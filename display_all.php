@@ -101,7 +101,7 @@ include('functions/common_function.php')
           <?php
 
           //calling getproduct function
-          getproducts();
+          get_all_products();
           get_unique_categories();
           get_unique_brands()
 
@@ -207,12 +207,16 @@ include('functions/common_function.php')
     </div>
 
     <!--last child-->
-    <!--include footer-->
-    <?php
-    include("./includes/footer.php")
-    ?>
-  
+    <div class="bg-info p-3 text-center">
+      <P>All rights resereved ,Copyright 2022</P>
+    </div>
+
+
   </div>
+
+
+
+
 
   <!-- bootstrap js link -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
