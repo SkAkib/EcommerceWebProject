@@ -75,6 +75,11 @@ include('functions/common_function.php')
       </div>
     </nav>
 
+    <?php
+    //calling to cart function
+    cart();
+    ?>
+
     <!-- second child -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
       <ul class="navbar-nav me-auto">
@@ -104,6 +109,8 @@ include('functions/common_function.php')
           getproducts();
           get_unique_categories();
           get_unique_brands()
+          
+
 
           /*
     $select_query="select * from `products` order by rand() limit 0,9"; 
@@ -128,10 +135,11 @@ include('functions/common_function.php')
               <a href='#' class='btn btn-primary'>Go somewhere</a>
             </div>
         </div>
-      </div>";
-      
+      </div>"; 
     }
     */
+    
+    
           ?>
           <!--
       <div class="col-md-4 mb-2">

@@ -30,7 +30,7 @@ function getproducts()
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-primary'>Add to cart</a>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
               <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
             </div>
         </div>
@@ -72,7 +72,7 @@ function get_unique_categories()
           <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-primary'>Go somewhere</a>
+            <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
             <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
           </div>
       </div>
@@ -113,7 +113,7 @@ function get_unique_brands()
           <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-primary'>Go somewhere</a>
+            <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
             <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
           </div>
       </div>
@@ -192,7 +192,7 @@ function search_product()
           <div class='card-body'>
             <h5 class='card-title'>$product_title</h5>
             <p class='card-text'>$product_description</p>
-            <a href='#' class='btn btn-primary'>Go somewhere</a>
+            <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
             <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
           </div>
       </div>
@@ -229,7 +229,7 @@ function get_all_products()
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-primary'>Go somewhere</a>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
               <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
             </div>
         </div>
@@ -270,8 +270,8 @@ function view_details()
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='#' class='btn btn-primary'>Go somewhere</a>
-              <a href='product_details.php?product_id=$product_id' class='btn btn-dark'>View More</a>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to cart</a>
+              <a href='index.php' class='btn btn-dark'>Go Home</a>
             </div>
         </div>
       </div>
@@ -288,6 +288,44 @@ function view_details()
                     </div>";
         }
       }
+    }
+  }
+}
+
+function get_ip_address(){
+  // if user from the share internet   
+  if(!empty($_SERVER['HTTP_CLIENT_IP'])) {   
+    echo 'IP address = '.$_SERVER['HTTP_CLIENT_IP'];   
+}   
+//if user is from the proxy   
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {   
+    echo 'IP address = '.$_SERVER['HTTP_X_FORWARDED_FOR'];   
+}   
+//if user is from the remote address   
+else{   
+    echo 'IP address = '.$_SERVER['REMOTE_ADDR'];   
+}     
+}
+
+//cart function
+function cart(){
+  if(isset($_GET['add_to_cart'])){
+    global $con;
+    $ip=get_ip_address();
+    $get_product_id=$_GET['add_to_cart'];
+    $select_query="select * from `cart_details` where ip_address='$ip' and product_id=$get_product_id";
+    $result_query = mysqli_query($con, $select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows>0){
+      echo "<script>alert('this item is already in cart')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
+    }
+    else{
+      $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values ('$get_product_id','$ip',0)";
+      $result_query = mysqli_query($con, $insert_query);
+      echo "<script>alert('successfully added to cart')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
+      
     }
   }
 }
