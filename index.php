@@ -41,7 +41,7 @@ include('functions/common_function.php')
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="./users_area/user_reg.php">Register</a>
             </li>
 
             <li class="nav-item">
@@ -87,7 +87,7 @@ include('functions/common_function.php')
           <a class="nav-link" href="#">Welcome Guest</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Log in</a>
+          <a class="nav-link" href="./users_area/user_login.php">Log in</a>
         </li>
       </ul>
     </nav>

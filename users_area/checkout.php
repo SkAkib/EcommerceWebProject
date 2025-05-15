@@ -1,5 +1,6 @@
 <?php
-include('includes/connect.php');
+include('../includes/connect.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +23,7 @@ include('includes/connect.php');
   <div class="container-fluid p-0 ">
     <!-- first child -->
     <nav class="navbar navbar-expand-lg bg-info">
-      <div class="container-fluid">
-        <img src="./images/logo.avif" alt="ecom-logo" class="logo">
+      
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,11 +32,11 @@ include('includes/connect.php');
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+              <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="display_all.php">Products</a>
+              <a class="nav-link" href="../display_all.php">Products</a>
             </li>
 
             <li class="nav-item">
@@ -48,7 +48,7 @@ include('includes/connect.php');
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="admin_area/index.php">Admin panel(TEST)</a>
+              <a class="nav-link" href="../admin_area/index.php">Admin panel(TEST)</a>
             </li>
           </ul>
 
@@ -81,11 +81,11 @@ include('includes/connect.php');
     </div>
     <!--Fourth child-->
     <div class="row px-1">
-        <div class="col-md-12">
+        <div class="col-md-12 d-flex justify-content-center">
             <div class="row">
                 <?php
                 if(!isset($_SESSION['username'])){
-                    include('users_area/user_login.php');
+                    include('user_login.php');
                 }else{
                     include('payment.php');
                 }
@@ -101,7 +101,7 @@ include('includes/connect.php');
     <!--last child-->
     <!--include footer-->
     <?php
-    include("./includes/footer.php")
+    include("../includes/footer.php")
     ?>
   
   </div>

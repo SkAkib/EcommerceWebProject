@@ -1,6 +1,6 @@
 <?php
 include('includes/connect.php');
-include('functions/common_function.php')
+include('functions/common_function.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,9 +185,9 @@ include('functions/common_function.php')
           if ($result_count > 0) {
             echo "<div class='d-flex mb-5'>
             <h4 class='px-3'>Subtotal: <strong class='text-info'><?php echo $total; ?></strong></h4>
-            <input type='submit' value='Continue Shopping' name='continue_shopping' class='bg-info px-3 border-2 p-1 mx-1'></input>
+            <input type='submit' value='Continue Shopping' name='continue_shopping' class='bg-info px-3 border-2 p-1 mx-1'>
 
-            <input type='submit' value='Checkout' name='checkout' class='bg-info px-3 border-2 p-1 mx-1' action='cart.php'></input>
+            <input type='submit' value='Checkout' name='checkout' class='bg-info px-3 border-2 p-1 mx-1' action='./users_area/checkout.php'>
           </div>";
           } else {
             echo "<input type='submit' value='Continue Shopping' name='continue_shopping' class='bg-info px-3 border-2 p-1 mx-1'></input>";
@@ -196,7 +196,7 @@ include('functions/common_function.php')
             echo "<script>window.open('index.php','_self')</script>";
           }
           if (isset($_POST['checkout'])) {
-            echo "<script>window.open('checkout.php','_self')</script>";
+            echo "<script>window.open('./users_area/checkout.php','_self')</script>";
           }
           ?>
 
