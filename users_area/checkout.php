@@ -1,5 +1,6 @@
 <?php
 include('../includes/connect.php');
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -23,87 +24,101 @@ include('../includes/connect.php');
   <div class="container-fluid p-0 ">
     <!-- first child -->
     <nav class="navbar navbar-expand-lg bg-info">
-      
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
-            </li>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <li class="nav-item">
-              <a class="nav-link" href="../display_all.php">Products</a>
-            </li>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../display_all.php">Products</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="../admin_area/index.php">Admin panel(TEST)</a>
-            </li>
-          </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
 
-          <form class="d-flex" action="search_product.php" method="get">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
-            <!--<button class="btn btn-outline-light" type="submit">Search</button> -->
-            <input type="submit" value="search" class="btn btn-outline-light" name="search_data_product">
-          </form>
+          <li class="nav-item">
+            <a class="nav-link" href="../admin_area/index.php">Admin panel(TEST)</a>
+          </li>
+        </ul>
 
-        </div>
+        <form class="d-flex" action="search_product.php" method="get">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
+          <!--<button class="btn btn-outline-light" type="submit">Search</button> -->
+          <input type="submit" value="search" class="btn btn-outline-light" name="search_data_product">
+        </form>
+
       </div>
-    </nav>
+  </div>
+  </nav>
 
 
-    <!-- second child -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Welcome Guest</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Log in</a>
-        </li>
-      </ul>
-    </nav>
-    <!--Third child-->
-    <div class="bg-light">
-      <h3 class="text-center">My store</h3>
-      <p class="text-center">Solution to all needs</p>
+  <!-- second child -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <ul class="navbar-nav me-auto">
+      <?php
+      if (!isset($_SESSION['username'])) {
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='#'>Welcome Guest</a>
+        </li>";
+      } else {
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='#'>Welcome " . $_SESSION['username'] . "</a></li>";
+      }
+
+      if (!isset($_SESSION['username'])) {
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='user_login.php'>Log in</a>
+        </li>";
+      } else {
+        echo "<li class='nav-item'>
+          <a class='nav-link' href='logout.php'>Log out</a>
+        </li>";
+      }
+      ?>
+    </ul>
+  </nav>
+  <!--Third child-->
+  <div class="bg-light">
+    <h3 class="text-center">My store</h3>
+    <p class="text-center">Solution to all needs</p>
+  </div>
+  <!--Fourth child-->
+  <div class="row px-1">
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="row">
+        <?php
+        if (!isset($_SESSION['username'])) {
+          include('user_login.php');
+        } else {
+          include('payment.php');
+        }
+
+        ?>
+
+      </div>
+
     </div>
-    <!--Fourth child-->
-    <div class="row px-1">
-        <div class="col-md-12 d-flex justify-content-center">
-            <div class="row">
-                <?php
-                if(!isset($_SESSION['username'])){
-                    include('user_login.php');
-                }else{
-                    include('payment.php');
-                }
-
-                ?>
-                
-            </div>
-
-        </div>
-    </div>
+  </div>
 
 
-    <!--last child-->
-    <!--include footer-->
-    <?php
-    include("../includes/footer.php")
-    ?>
-  
+  <!--last child-->
+  <!--include footer-->
+  <?php
+  include("../includes/footer.php")
+  ?>
+
   </div>
 
   <!-- bootstrap js link -->

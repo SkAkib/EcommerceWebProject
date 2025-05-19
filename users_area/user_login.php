@@ -1,6 +1,7 @@
 <?php
 include('../includes/connect.php');
 include('../functions/common_function.php');
+@session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,8 +62,8 @@ global $con;
 if (isset($_POST['user_login'])) {
     $user_name = $_POST['user_name'];
     $user_password = $_POST['user_password'];
-    
 
+    //checking if user is registered in db
     $select_query = "select * from `users` where user_name='$user_name'";
     $result_user = mysqli_query($con, $select_query);
     $row_count = mysqli_num_rows($result_user);
@@ -71,24 +72,32 @@ if (isset($_POST['user_login'])) {
 
     //checking if there is item in cart
     $select_query_cart = "select * from `cart_details` where ip_address='$ip_add'";
-    $result_cart = mysqli_query($con,$select_query_cart);
+    $result_cart = mysqli_query($con, $select_query_cart);
     $row_count_cart = mysqli_num_rows($result_cart);
+
     if ($row_count > 0) {
         $_SESSION['username']=$user_name;
-        if (password_verify($user_password,$row_data['user_password'])) {
+        if (password_verify($user_password,$row_data['user_password'])==true) {
             //echo "<script>alert('Login successful')</script>";
-            if ($row_count==1 and $row_count_cart==0) {
-                $_SESSION['username']=$user_name;
+            if ($row_count>0 and $row_count_cart<1) {
+                $_SESSION['username'] = $user_name;
                 echo "<script>alert('Login successful')</script>";
                 echo "<script>window.open('profile.php','_self')</script>";
-            }
-        } else {
-            $_SESSION['username']=$user_name;
+            }else {
+            $_SESSION['username'] = $user_name;
             echo "<script>alert('Login successful')</script>";
             echo "<script>window.open('payment.php','_self')</script>";
+            }
+        }
+        else{
+            echo "<script>alert('Invalid credentials')</script>";
+            session_unset();
+            session_destroy();
         }
     } else {
         echo "<script>alert('Invalid credentials')</script>";
+        session_unset();
+        session_destroy();
     }
 }
 ?>
