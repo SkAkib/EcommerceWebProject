@@ -76,20 +76,19 @@ if (isset($_POST['user_login'])) {
     $row_count_cart = mysqli_num_rows($result_cart);
 
     if ($row_count > 0) {
-        $_SESSION['username']=$user_name;
-        if (password_verify($user_password,$row_data['user_password'])==true) {
+        $_SESSION['username'] = $user_name;
+        if (password_verify($user_password, $row_data['user_password']) == true) {
             //echo "<script>alert('Login successful')</script>";
-            if ($row_count>0 and $row_count_cart<1) {
+            if ($row_count > 0 and $row_count_cart < 1) {
                 $_SESSION['username'] = $user_name;
                 echo "<script>alert('Login successful')</script>";
                 echo "<script>window.open('profile.php','_self')</script>";
-            }else {
-            $_SESSION['username'] = $user_name;
-            echo "<script>alert('Login successful')</script>";
-            echo "<script>window.open('payment.php','_self')</script>";
+            } else {
+                $_SESSION['username'] = $user_name;
+                echo "<script>alert('Login successful')</script>";
+                echo "<script>window.open('payment.php','_self')</script>";
             }
-        }
-        else{
+        } else {
             echo "<script>alert('Invalid credentials')</script>";
             session_unset();
             session_destroy();

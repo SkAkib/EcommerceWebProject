@@ -378,6 +378,36 @@ function total_cart_price()
   echo $total;
 };
 
+//get user order details
+function get_user_order_details()
+{
+  global $con;
+  $user_name = $_SESSION['username'];
+  $get_details = "select * from `users` where user_name='$user_name'";
+  $result_details = mysqli_query($con, $get_details);
+  while ($row_result = mysqli_fetch_array($result_details)) {
+    $user_id = $row_result['user_id'];
+    if (!isset($_GET['edit_account'])) {
+      if (!isset($_GET['my_orders'])) {
+        if (!isset($_GET['delete_account'])) {
+          $get_orders="select * from `user_orders` where user_id=$user_id and order_status='pending'";
+          $result_order=mysqli_query($con, $get_orders);
+          $row_orders=mysqli_num_rows($result_order);
+          if($row_orders>0){
+            echo "<h3 class='text-center text-success my-5'>You have <span class='text-danger'>$row_orders</span> pending orders</h3>";
+            echo "<p class='text-center text-success my-5'><a href='profile.php?my_orders'>Order details</a></p>";
+          }else{
+            echo "<h3 class='text-center text-success my-5'>You have No pending orders</h3>";
+            echo "<p class='text-center text-success my-5'><a href='../index.php'>Go home</a></p>";
+          }
+        }
+      }
+    }
+  }
+};
+
+//
+
 
 
 //Cart dynamic table data_
@@ -410,5 +440,3 @@ function total_cart_price()
   return $product_title;
 };
 */
-
-

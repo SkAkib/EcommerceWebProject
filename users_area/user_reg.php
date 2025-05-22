@@ -115,6 +115,7 @@ if (isset($_POST['user_register'])) {
         $result_query = mysqli_query($con, $insert_query);
         if ($result_query) {
             echo "<script>alert('Registered successfully')</script>";
+            echo "<script>window.open('user_login.php','_self')</script>";
         } else {
             die(mysqli_error($con));
         }

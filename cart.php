@@ -166,9 +166,9 @@ include('functions/common_function.php');
                       }
                       ?>
 
-                      <td> <input type="text" name="qty" class="form-input w-35 text-center"></td>
+                      <td> <input type="text" name="qty" class="form-input w-35 text-center" value="<?php echo $quantity; ?>"></td>
                       <td><?php echo $product_price_sum ?></td>
-                      <td> <input type="checkbox" name="remove_item[]" value="<?php echo $product_id ?>"></td>
+                      <td> <input type="checkbox" name="remove_item" value="<?php echo $product_id ?>"></td>
                       <td>
                         <input type="submit" value="update cart" name="update_cart" class="bg-info px-3 border-2 p-1 mx-1"></input>
                         <input type="submit" value="remove cart" name="remove_cart" class="bg-info px-3 border-2 p-1 mx-1"></input>
@@ -188,14 +188,14 @@ include('functions/common_function.php');
 
           <?php
           $ip_add = get_ip_address();
-          $total = 0;
+          
 
           $cart_query = "select * from `cart_details` where ip_address='$ip_add'";
           $result_query = mysqli_query($con, $cart_query);
           $result_count = mysqli_num_rows($result_query);
           if ($result_count > 0) {
             echo "<div class='d-flex mb-5'>
-            <h4 class='px-3'>Subtotal: <strong class='text-info'><?php echo $total; ?></strong></h4>
+            <h4 class='px-3'>Subtotal: <strong class='text-info'> $total </strong></h4>
             <input type='submit' value='Continue Shopping' name='continue_shopping' class='bg-info px-3 border-2 p-1 mx-1'>
 
             <input type='submit' value='Checkout' name='checkout' class='bg-info px-3 border-2 p-1 mx-1' action='./users_area/checkout.php'>

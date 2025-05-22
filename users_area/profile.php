@@ -19,11 +19,19 @@ include('../functions/common_function.php');
   <link rel="stylesheet" href="../styles.css">
   <style>
     .profile_image{
-    width: 70%;
+    width: 90%;
     margin: auto;
     display: block;
     object-fit: contain;
-}
+  }
+  body{
+    overflow-x:hidden;
+  }
+  .edit_image{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
   </style>
 </head>
 
@@ -46,7 +54,7 @@ include('../functions/common_function.php');
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="display_all.php">Products</a>
+              <a class="nav-link" href="../display_all.php">Products</a>
             </li>
 
             <li class="nav-item">
@@ -124,34 +132,55 @@ include('../functions/common_function.php');
     </div>
     <!--Fourth child-->
     
-    <div class="row">
+    <div class="row p-4 bg-light">
       <div class="col-md-2 col-sm-4 p-0">
         <ul class="navbar-nav bg-secondary text-center" style="height:100vh">
           <li class="nav-item bg-info">
-              <a class="nav-link text-light" href="#"><h4>Your profile</h4></a>
+              <a class="nav-link text-light" href="profile.php"><h4>Your profile</h4></a>
           </li>
-          <li class="nav-item bg-info">
-              <img src="../images/logo.avif" class="profile_image" alt="image">
+
+          <?php
+          $user_name=$_SESSION['username'];
+          $user_image="select * from `users` where user_name='$user_name'";
+          $result_image=mysqli_query($con,$user_image);
+          $row_image=mysqli_fetch_array($result_image);
+          $user_image=$row_image['user_image'];
+
+          echo "<li class='nav-item bg-info'>
+              <img src='./users_images/$user_image' class='profile_image' alt='image'>
+          </li>";
+          ?>
+
+          <li class="nav-item">
+              <a class="nav-link text-light" href="profile.php">Pending Orders</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link text-light" href="#">Pending Orders</a>
+              <a class="nav-link text-light" href="profile.php?edit_account">Edit Account</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link text-light" href="#">Edit Account</a>
+              <a class="nav-link text-light" href="profile.php?my_orders">My Orders</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link text-light" href="#">My Orders</a>
+              <a class="nav-link text-light" href="profile.php?delete_account">Delete Account</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link text-light" href="#">Delete Account</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link text-light" href="#">Log Out</a>
+              <a class="nav-link text-light" href="profile.php?log_out">Log Out</a>
           </li>
         </ul>
       </div>
-      <div class="col-md-10 col-sm-8 p-0">
-
+      <div class="col-md-10 col-sm-8 p-0 text-center">
+        <?php
+        get_user_order_details();
+        if(isset($_GET['edit_account'])){
+          include('edit_account.php');
+        }
+        if(isset($_GET['my_orders'])){
+          include('my_orders.php');
+        }
+        if(isset($_GET['delete_account'])){
+          include('delete_account.php');
+        }
+        ?>
       </div>
       
     </div>

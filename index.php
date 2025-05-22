@@ -41,9 +41,17 @@ include('functions/common_function.php');
               <a class="nav-link" href="display_all.php">Products</a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="./users_area/user_reg.php">Register</a>
-            </li>
+            <?php
+            if(!isset($_SESSION['username'])){
+              echo "<li class='nav-item'>
+                      <a class='nav-link' href='./users_area/user_reg.php'>Register</a>
+                    </li>";
+            }else{
+              echo "<li class='nav-item'>
+                      <a class='nav-link' href='./users_area/profile.php'>My Account</a>
+                    </li>";
+            }
+            ?>
 
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
@@ -93,7 +101,7 @@ include('functions/common_function.php');
         }
         else{
           echo "<li class='nav-item'>
-          <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a></li>";
+          <a class='nav-link' href='./users_area/profile.php'>Welcome ".$_SESSION['username']."</a></li>";
           
         }
         
