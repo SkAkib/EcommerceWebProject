@@ -163,10 +163,11 @@ include('functions/common_function.php');
                         $update_cart = "update `cart_details` set quantity=$quantity where ip_address='$ip_add' and product_id='$product_id'";
                         $result_products_quantity = mysqli_query($con, $update_cart);
                         $total *= $quantity;
+                        $qty=$quantity;
                       }
                       ?>
 
-                      <td> <input type="text" name="qty" class="form-input w-35 text-center" value="<?php echo $quantity; ?>"></td>
+                      <td> <input type="text" name="qty" class="form-input w-35 text-center" value="<?php echo $qty; ?>"></td>
                       <td><?php echo $product_price_sum ?></td>
                       <td> <input type="checkbox" name="remove_item" value="<?php echo $product_id ?>"></td>
                       <td>
