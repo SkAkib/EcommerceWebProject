@@ -46,3 +46,14 @@
                 $total = $total * $quantities;
               }
     -->
+
+    <tr class='text-center'>
+                    <td>$product_id</td>
+                    <td>$product_title</td>
+                    <td>$product_image1</td>
+                    <td>$product_price</td>
+                    <td>$total_sold</td>
+                    <td>$product_status</td>
+                    <td><a href='' class='text-success'><i CLASS='fa-solid fa-pen-to-square'></i></a></td>
+                    <td><a href='' class='text-danger'><i CLASS='fa-solid fa-trash'></i></a></td>
+                </tr>
