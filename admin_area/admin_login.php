@@ -1,51 +1,77 @@
+<?php
+session_start();
+include('../includes/connect.php'); // DB connection
+
+if (isset($_POST['user_login'])) {
+    $username = trim(mysqli_real_escape_string($con, $_POST['user_name']));
+    $password = $_POST['user_password'];
+
+    // Fetch user record
+    $query = "SELECT * FROM `admins` WHERE admin_name='$username'";
+    $result = mysqli_query($con, $query);
+    
+    if ($result && mysqli_num_rows($result) === 1) {
+        $row = mysqli_fetch_assoc($result);
+        $stored_hash = $row['admin_password'];
+
+        if (password_verify($password, $stored_hash)) {
+            $_SESSION['admin_name'] = $username;
+            echo "<script>alert('Login successful!')</script>";
+            echo "<script>window.location.href='index.php';</script>"; // Redirect to admin dashboard
+        } else {
+            echo "<script>alert('Invalid password!')</script>";
+        }
+    } else {
+        echo "<script>alert('Admin not found!')</script>";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin login</title>
-    <!--bootstrap css link-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--css file-->
+    <title>Admin Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../styles.css">
-    <!-- font awesome link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 </head>
 <body>
-    <h3 class="text-center">Admin Login</h3>
-   <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6 bg-dark">Image</div>
-        <div class="col-md-6 col-sm-10 bg-danger">
-            <form action="" method="post">
-
-                    <!--username field-->
+    <div class="container-fluid">
+        <h3 class="text-center text-primary mt-5">Admin Login</h3>
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-4">
+                <form action="admin_login.php" method="post" class="p-4 border rounded shadow bg-light">
+                    <!-- Username -->
                     <div class="form-outline mb-4">
-                        <label for="user_name" class="form-label">user name</label>
-                        <input type="text" id="user_name" class="form-control" placeholder="Enter name" autocomplete="off" required="required" name="user_name" />
-
+                        <label for="user_name" class="form-label">Username</label>
+                        <input type="text" id="user_name" name="user_name" class="form-control" placeholder="Enter username" required autocomplete="off">
                     </div>
-
-
-                    <!--Password field-->
+                    <!-- Password -->
                     <div class="form-outline mb-4">
                         <label for="user_password" class="form-label">Password</label>
-                        <input type="text" id="user_password" class="form-control" placeholder="enter password" name="user_password" />
-
+                        <input type="password" id="user_password" name="user_password" class="form-control" placeholder="Enter password" required>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <input type="submit" value="login" class="bg-info p-2 mx-3 border-0" name="user_login">
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Not registered?</p><a href="user_reg.php" class="small fw-bold mt-2 pt-1 mb-0 ">Register</a>
+                    <!-- Login Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="user_login" class="btn btn-info text-white">Login</button>
                     </div>
-            </form>
-
+                    <!-- Register Redirect -->
+                    <p class="small mt-3 text-center">
+                        Not registered? <a href="admin_reg.php" class="text-decoration-none">Register here</a>
+                    </p>
+                </form>
+            </div>
+            <a href="../index.php" class="bg-dark text-white text-center mt-3"><i class="fa-solid fa-house"></i> Go Home</a>
         </div>
     </div>
-   </div> 
 
-   <!--bootstrap js link-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

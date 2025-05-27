@@ -91,7 +91,7 @@ if (isset($_POST['user_register'])) {
     $user_name = $_POST['user_name'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-    $hash_password=password_hash($user_password,PASSWORD_DEFAULT);
+    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
     $user_conf_password = $_POST['user_conf_password'];
     $user_image = $_FILES['user_image']['name'];
     $user_image_tmp = $_FILES['user_image']['tmp_name'];
@@ -101,7 +101,7 @@ if (isset($_POST['user_register'])) {
 
     //checking if user already exists in database
     $select_query = "select * from `users` where user_name='$user_name' or user_email='$user_email'";
-    $result = mysqli_query($con,$select_query);
+    $result = mysqli_query($con, $select_query);
     $row_count = mysqli_num_rows($result);
     if ($row_count > 0) {
         echo "<script>alert('Username or Emailalready exists!')</script>";
@@ -121,14 +121,14 @@ if (isset($_POST['user_register'])) {
         }
     }
     //selecting cart items
-    $select_cart_items="select * from `cart_details` where ip_address='$ip_add'";
-    $result_cart=mysqli_query($con,$select_cart_items);
+    $select_cart_items = "select * from `cart_details` where ip_address='$ip_add'";
+    $result_cart = mysqli_query($con, $select_cart_items);
     $row_count = mysqli_num_rows($result_cart);
-    if($row_count>0){
-        $_SESSION['user_name']=$user_name;
+    if ($row_count > 0) {
+        $_SESSION['user_name'] = $user_name;
         echo "<script>alert('Your have items in cart')</script>";
         echo "<script>window.open('checkout.php','_self')</script>";
-    }else{
+    } else {
         echo "<script>window.open('../index.php','_self')";
     }
 }
